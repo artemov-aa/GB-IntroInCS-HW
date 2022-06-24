@@ -17,6 +17,16 @@ secondFriendSpeed = Convert.ToInt32(Console.ReadLine());
 Console.Write("Введите скорость пёсика (в м/с): ");
 dogSpeed = Convert.ToInt32(Console.ReadLine());
 
+// вычисление масштаба в зависимости от расстояния между друзьями
+int winWidth = Console.WindowWidth;
+Console.WriteLine(Convert.ToString(winWidth));
+int scale = dist / winWidth;
+
+Console.SetCursorPosition(0, 8);
+Console.Write("F1");
+Console.SetCursorPosition(dist / scale - 2, 8);
+Console.Write("F2");
+
 while (dist > 10)
 {
     if (friend == 1)
@@ -30,6 +40,7 @@ while (dist > 10)
         friend = 1;
     }
     dist = dist - (firstFriendSpeed + secondFriendSpeed) * time;
+    //Console.WriteLine(Convert.ToString(dist));
     count++;
 }
 
