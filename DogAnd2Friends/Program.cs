@@ -1,6 +1,7 @@
 ﻿Console.Clear();
 
 int dist = 0;
+int meetDist = 10;
 int firstFriendSpeed = 0;
 int secondFriendSpeed = 0;
 int dogSpeed = 0;
@@ -18,16 +19,16 @@ Console.Write("Введите скорость пёсика (в м/с): ");
 dogSpeed = Convert.ToInt32(Console.ReadLine());
 
 // вычисление масштаба в зависимости от расстояния между друзьями
-int winWidth = Console.WindowWidth;
-Console.WriteLine(Convert.ToString(winWidth));
-int scale = dist / winWidth;
+// int winWidth = Console.WindowWidth;
+// Console.WriteLine(Convert.ToString(winWidth));
+// int scale = dist / winWidth;
 
-Console.SetCursorPosition(0, 8);
-Console.Write("F1");
-Console.SetCursorPosition(dist / scale - 2, 8);
-Console.Write("F2");
+// Console.SetCursorPosition(0, 8);
+// Console.Write("F1");
+// Console.SetCursorPosition(dist / scale - 2, 8);
+// Console.Write("F2");
 
-while (dist > 10)
+while (dist > meetDist)
 {
     if (friend == 1)
     {
@@ -44,4 +45,5 @@ while (dist > 10)
     count++;
 }
 
+//Console.WriteLine("Пёсик пробежит туда-сюда: " + count + " раз(а)"); // эта конструкция тоже работает
 Console.WriteLine($"Пёсик пробежит туда-сюда: {count} раз(а)");
