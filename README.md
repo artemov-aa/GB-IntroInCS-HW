@@ -6,4 +6,4 @@
 + [Задача 6](task06-EvenNumber)
 + [Задача 8](task08-NumberOfEvens)
 + [Задача 10](task10-SecondDigitOfNumber)
-+ [Задача 13](task13-ThirdDigitNumber)git 
++ [Задача 13](task13-ThirdDigitNumber)
