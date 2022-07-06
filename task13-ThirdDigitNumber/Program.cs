@@ -19,7 +19,7 @@ if (result) // Убедились, что это число.
 {
     // Отбрасываем дробную часть введенного числа используя оператор приведения
     // и узнаем количество разрядов в оставшейся целой части числа.
-    int lengthNum = Convert.ToString((int)(num / 1)).Length;
+    int lengthNum = Convert.ToString((int)(Math.Abs(num) / 1)).Length; // Ну а что, отрицательные числа тоже можно вводить, все работает)
 
     if (lengthNum < 3)
         Console.WriteLine("Третьей цифры нет");
