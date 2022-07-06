@@ -32,3 +32,5 @@ if (result) // Убедились, что это число.
         Console.WriteLine($"Третья цифра введенного числа: {thirdDig}");
     }
 }
+else
+    Console.WriteLine("Введенная строка не является числом!");
