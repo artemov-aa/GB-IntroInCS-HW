@@ -9,16 +9,17 @@ Console.Clear();
 Console.Write("Введите число: ");
 string str = Console.ReadLine();
 
-// Проверка корректности ввода.
-// Введенную строку можно преобразовать в число?
-bool result = int.TryParse(str, out int num);
+// Т.к. в условии не указан конкретный тип числа,
+// то предполагаем, что оно может быть любым (т.е. даже (вдруг) действительным).
+bool result = double.TryParse(str, out double num);
 
 // Console.WriteLine($"{result}, {num}");
 
 if (result) // Убедились, что это число.
 {
-    // Узнаем количество разрядов в веденном числе.
-    int lengthNum = str.Length;
+    // Отбрасываем дробную часть введенного числа используя оператор приведения
+    // и узнаем количество разрядов в оставшейся целой части числа.
+    int lengthNum = Convert.ToString((int)(num / 1)).Length;
 
     if (lengthNum < 3)
         Console.WriteLine("Третьей цифры нет");
@@ -27,9 +28,7 @@ if (result) // Убедились, что это число.
         // Отделяем первые три разряда путем целочисленного деления на 10 в степени (количество разрядов минус три).
         num = num / Convert.ToInt32(Math.Pow(Convert.ToDouble(10), Convert.ToDouble(lengthNum - 3)));
         // От оставшегося целого трехзначного числа отделяем остаток от деления на 10.
-        int thirdDig = num % 10;
+        int thirdDig = (int)(num % 10);
         Console.WriteLine($"Третья цифра введенного числа: {thirdDig}");
     }
 }
-else
-    Console.WriteLine("Попытка не удалась по двум вероятным причинам: либо введенная строка не является числом, либо это число, но не целое)");
