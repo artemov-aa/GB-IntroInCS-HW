@@ -7,3 +7,4 @@
 + [Задача 8](task08-NumberOfEvens)
 + [Задача 10](task10-SecondDigitOfNumber)
 + [Задача 13](task13-ThirdDigitNumber)
++ [Задача 15](task15-IsWeekend)
