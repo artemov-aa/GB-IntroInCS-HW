@@ -5,24 +5,24 @@
 // 12821 -> да
 // 23432 -> да
 
-string CheckInput(string input, int numberLength)
+bool IsItAPalindrome(string number)
 {
-    while (!int.TryParse(input, out int result) || result < 0 || input.Length != numberLength)
-    {
-        Console.Write($"Неверный ввод! \nВведите {numberLength}-значное натуральное число: ");
-        input = Console.ReadLine();
-    }
-    return input;
-}
-
-void IsItA5DigitPalindrome(string number)
-{    
     if ((number[0] == number[4]) && (number[1] == number[3]))
-        Console.WriteLine("Введенное число - палиндром.");
+        return true;
     else
-        Console.WriteLine("Введенное число - не палиндром.");
+        return false;
 }
 
-Console.Write("Введите пятизначное натуральное число: ");
+Console.Write("Введите пятизначное число: ");
+string input = Console.ReadLine();
 
-IsItA5DigitPalindrome(CheckInput(Console.ReadLine(), 5));
+while (!int.TryParse(input, out int result) || result < 0 || input.Length != 5)
+{
+    Console.Write($"Неверный ввод! \nВведите пятизначное натуральное число: ");
+    input = Console.ReadLine();
+}
+
+if (IsItAPalindrome(input))
+    Console.WriteLine("Введенное число - палиндром.");
+else
+    Console.WriteLine("Введенное число - не палиндром.");
