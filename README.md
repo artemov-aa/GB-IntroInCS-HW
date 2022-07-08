@@ -10,3 +10,6 @@
 + [Задача 10](task10-SecondDigitOfNumber)
 + [Задача 13](task13-ThirdDigitNumber)
 + [Задача 15](task15-IsWeekend)
+
+### Урок 3. Массивы и функции в программировании
++ [Задача 19](task19-Palindrome)
