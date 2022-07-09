@@ -5,7 +5,7 @@
 // 12821 -> да
 // 23432 -> да
 
-bool IsItAPalindrome(string number)
+bool Palindrome(string number)
 {
     if ((number[0] == number[4]) && (number[1] == number[3]))
         return true;
@@ -22,7 +22,7 @@ while (!int.TryParse(input, out int result) || result < 0 || input.Length != 5)
     input = Console.ReadLine();
 }
 
-if (IsItAPalindrome(input))
+if (Palindrome(input))
     Console.WriteLine("Введенное число - палиндром.");
 else
     Console.WriteLine("Введенное число - не палиндром.");
