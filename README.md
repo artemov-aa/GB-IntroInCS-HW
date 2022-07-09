@@ -13,3 +13,5 @@
 
 ### Урок 3. Массивы и функции в программировании
 + [Задача 19](task19-Palindrome)
++ [Задача 21](task21-DistanceIn3DSpace)
++ [Задача 21](task23-TableOFCubes)
