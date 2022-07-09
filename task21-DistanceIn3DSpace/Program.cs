@@ -12,13 +12,6 @@ float[] dotB = new float[3];
 string coordinatesOfDotA = String.Empty;
 string coordinatesOfDotB = String.Empty;
 
-void PrintArray(float[] array)
-{
-    for (int i = 0; i < array.Length; i++)
-        Console.Write($"{array[i]} ");
-    Console.WriteLine("\b \b");
-}
-
 // Метод принимает на вход строку с координатами точки, производит валидацию и конвертацию данных,
 // заполняет массив координат.
 bool ValidateAndFillCoordinates(float[] array, string coordinates)
