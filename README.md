@@ -15,3 +15,8 @@
 + [Задача 19](task19-Palindrome)
 + [Задача 21](task21-DistanceIn3DSpace)
 + [Задача 21](task23-TableOFCubes)
+
+### Урок 4. Функции продолжение
++ [Задача 25](task25)
++ [Задача 27](task27)
++ [Задача 29](task29)
