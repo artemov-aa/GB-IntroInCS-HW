@@ -1,36 +1,30 @@
 ﻿// Задача 43
 // Напишите программу, которая найдёт точку пересечения двух прямых,
 // заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; значения b1, k1, b2 и k2 задаются пользователем.
-
 // b1 = 2, k1 = 5, b2 = 4, k2 = 9 -> (-0,5; -0,5)
 
 // Для вычисления координаты точки пересечения неоюходимо решить систему из двух уравнений:
-// | y1 = k1 * x2 + b1     | x = (b2 - b1) / (k1 - k2)
-// |                    =  |
-// | y2 = k2 * x2 + b2     | y = (k1 * b2 - k2 * b1) / (k1 - k2)
+// | y = k1 * x + b1     | x = (b2 - b1) / (k1 - k2)
+// |                  =  |
+// | y = k2 * x + b2     | y = k2 * x + b2 
 
-
-// Метод вычисляет координаты точки пересечения двух прямых в случае, если они не параллельны и не совпадают.
-void FindCrossPoint(float[,] attrOfLines, bool[] isParallelOrMatch, float[] crossPoint)
+float[] FindCrossPoint(float k1, float b1, float k2, float b2, ref bool isParallel, ref bool isMatch)
 {
-    // Условие параллельности прямых: k1 = k2.
-    if (attrOfLines[0,0] == attrOfLines[1,0])
-    {
-        isParallelOrMatch[0] = true;
+    float[] crossPoint = new float[2];
 
-        // Условие совпадения прямых: (k1 = k2) & (b1 = b2)
-        if (attrOfLines[0,1] == attrOfLines[1,1])
-            isParallelOrMatch[1] = true;
-        return;
+    if (k1 == k2)
+    {
+        isParallel = true;
+        if (b1 == b2) isMatch = true;
+        return crossPoint;
     }
 
     // Находим координату Х.
-    crossPoint[0] = (attrOfLines[1,1] - attrOfLines[0,1])
-                    / (attrOfLines[0,0] - attrOfLines[1,0]);
+    crossPoint[0] = (b2 - b1) / (k1 - k2);
 
     // Находим координату У.
-    crossPoint[1] = (attrOfLines[0,0] * attrOfLines[1,1] - attrOfLines[1,0] * attrOfLines[0,1])
-                    / (attrOfLines[0,0] - attrOfLines[1,0]);
+    crossPoint[1] = k2 * crossPoint[0] + b2;
+    return crossPoint;
 }
 
 float ValidateNumber(string input)
@@ -48,25 +42,25 @@ float ValidateNumber(string input)
 
 Console.Clear();
 
-float[,] attrOfLines = new float[2,2];
-float[] crossPoint = new float[2];
-bool[] isParallelOrMatch = new bool[2];
+Console.Write($"Введите коэффициент k1 -> ");
+float k1 = ValidateNumber(Console.ReadLine());
 
-for (int i = 0; i < attrOfLines.GetLength(1); i++)
-    for (int j = 0; j < attrOfLines.GetLength(0); j++)
-    {
-        if (i == 0)
-            Console.Write($"Введите коэфиициент уравнения k{j+1} -> ");
-        else
-            Console.Write($"Введите свободный член уравнения b{j+1} -> ");
-        attrOfLines[j,i] = ValidateNumber(Console.ReadLine());
-    }
+Console.Write($"Введите коэфиициент b1 -> ");
+float b1 = ValidateNumber(Console.ReadLine());
 
-FindCrossPoint(attrOfLines, isParallelOrMatch, crossPoint);
+Console.Write($"Введите коэффициент k2 -> ");
+float k2 = ValidateNumber(Console.ReadLine());
 
-if (isParallelOrMatch[0] && isParallelOrMatch[1])
+Console.Write($"Введите коэффициент b2 -> ");
+float b2 = ValidateNumber(Console.ReadLine());
+
+bool isParallel = false;
+bool isMatch = false;
+
+float[] crossPoint = FindCrossPoint(k1, b1, k2, b2, ref isParallel, ref isMatch);
+
+if (!isParallel)
+    Console.WriteLine($"Координаты точки пересечения прямых [{crossPoint[0]}; {crossPoint[1]}].");
+else if(isMatch)
     Console.WriteLine("Прямые совпадают.");
-else if (isParallelOrMatch[0])
-        Console.WriteLine("Прямые параллельны.");
-    else    
-        Console.WriteLine($"Координаты точки пересечения прямых [{crossPoint[0]}; {crossPoint[1]}].");
+    else Console.WriteLine("Прямые параллельны.");
