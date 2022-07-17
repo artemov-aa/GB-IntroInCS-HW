@@ -5,7 +5,7 @@
 // 1 -3,3 8 -9,9
 // 8 7,8 -7,1 9
 
-float[,] FillRandomMatrix(int rows = 4, int columns = 4, int digitsOfRndValue = 1)
+float[,] GetRandomMatrix(int rows = 4, int columns = 4, int digitsOfRndValue = 1)
 {
     float[,] matrix = new float[rows, columns];
     Random rnd = new Random();
@@ -42,5 +42,5 @@ void PrintMatrix(float[,] matrix)
 }
 
 Console.Clear();
-float[,] mtrx = FillRandomMatrix();
+float[,] mtrx = GetRandomMatrix();
 PrintMatrix(mtrx);
