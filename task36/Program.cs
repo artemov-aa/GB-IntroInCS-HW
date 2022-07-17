@@ -29,7 +29,7 @@ int SumOfNumbersOnEvenPos(int[] array)
 
     return sum;
 }
-
+    
 Console.Clear();
 
 int[] array = FillArray(4, -10, 50);
