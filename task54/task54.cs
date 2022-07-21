@@ -28,9 +28,9 @@ int[,] GetMatrix(int rows = 4, int columns = 4, int min = 0, int max = 10)
     int[,] matrix = new int[rows, columns];
     var rnd = new Random();
 
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int i = 0; i < rows; i++)
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int j = 0; j < columns; j++)
         {
             matrix[i, j] = rnd.Next(min, max + 1);
         }
@@ -41,13 +41,13 @@ int[,] GetMatrix(int rows = 4, int columns = 4, int min = 0, int max = 10)
 
 void PrintMatrix(int[,] matrix)
 {
-    int rows = matrix.GetLength(0);
-    int columns = matrix.GetLength(1);
+    int rowsLength = matrix.GetLength(0);
+    int columnsLength = matrix.GetLength(1);
     const int widthOfColumn = 3;
 
-    for (int i = 0; i < rows; i++)
+    for (int i = 0; i < rowsLength; i++)
     {
-        for (int j = 0; j < columns; j++)
+        for (int j = 0; j < columnsLength; j++)
         {
             if (j == 0) Console.Write(" | ");
             Console.Write($"{matrix[i, j],widthOfColumn} | ");
@@ -65,10 +65,10 @@ void Swap(ref int numA, ref int numB)
     numB = numC;
 }
 
-void SelectionSortUp(int[,] array)
+void SelectionSortUp(int[,] matrix)
 {
-    int rowsLength = array.GetLength(0);
-    int columnsLength = array.GetLength(1);
+    int rowsLength = matrix.GetLength(0);
+    int columnsLength = matrix.GetLength(1);
 
     for (int i = 0; i < rowsLength; i++)
     {
@@ -78,18 +78,18 @@ void SelectionSortUp(int[,] array)
 
             for (int k = j + 1; k < columnsLength; k++)
             {
-                if (array[i, k] < array[i, minPosition]) minPosition = k;
+                if (matrix[i, k] < matrix[i, minPosition]) minPosition = k;
             }
 
-            Swap(ref array[i, j], ref array[i, minPosition]);
+            Swap(ref matrix[i, j], ref matrix[i, minPosition]);
         }
     }
 }
 
-void SelectionSortDown(int[,] array)
+void SelectionSortDown(int[,] matrix)
 {
-    int rowsLength = array.GetLength(0);
-    int columnsLength = array.GetLength(1);
+    int rowsLength = matrix.GetLength(0);
+    int columnsLength = matrix.GetLength(1);
 
     for (int i = 0; i < rowsLength; i++)
     {
@@ -99,10 +99,10 @@ void SelectionSortDown(int[,] array)
 
             for (int k = j + 1; k < columnsLength; k++)
             {
-                if (array[i, k] > array[i, minPosition]) minPosition = k;
+                if (matrix[i, k] > matrix[i, minPosition]) minPosition = k;
             }
 
-            Swap(ref array[i, j], ref array[i, minPosition]);
+            Swap(ref matrix[i, j], ref matrix[i, minPosition]);
         }
     }
 }
