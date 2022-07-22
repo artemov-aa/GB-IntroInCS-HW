@@ -50,12 +50,12 @@ void Print3DMatrix(int[,,] matrix)
         {
             for (int k = 0; k < n3; k++)
             {
-                Console.Write($"{matrix[j, i, k]} "); Thread.Sleep(100);
-                Console.Write("[{0}, {1}, {2}]\t", j, i, k); Thread.Sleep(100);
+                Console.Write($"{matrix[j, i, k]} "); Thread.Sleep(50);
+                Console.Write("[{0}, {1}, {2}]\t", j, i, k); Thread.Sleep(50);
             }
-            Console.WriteLine(); Thread.Sleep(300);
+            Console.WriteLine(); Thread.Sleep(200);
         }
-        Console.WriteLine(); Thread.Sleep(400);
+        Console.WriteLine(); Thread.Sleep(300);
     }
 }
 
