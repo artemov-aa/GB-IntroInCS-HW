@@ -18,7 +18,7 @@ int columns     = InputNaturalNumber("Введите количество сто
 int minValue    = InputIntegerNumber("Введите минимальное значение для элементов массива: ");
 int maxValue    = InputIntegerNumber("Введите максимальное значение для элементов массива: ");
 
-int[,] array    = CreateMatrix(rows, columns, minValue, maxValue);
+int[,] array = CreateMatrix(rows, columns, minValue, maxValue);
 Console.WriteLine("\nИсходная матрица:\n");
 PrintMatrix(array);
 
