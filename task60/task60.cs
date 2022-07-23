@@ -63,6 +63,29 @@ void Print3DMatrix(int[,,] matrix)
 
 Console.Clear();
 
+int m = 0;
+int initVal = 0;
+bool errorOcured = false;
+
+Console.WriteLine("==== Построчный вывод трехмерного массива из неповторяющихся элементов ====\n");
+
+try
+{
+    Console.Write("Введите размер стороны квадратной матрицы >> ");
+    m = Convert.ToInt32(Console.ReadLine());
+
+    Console.Write("Введите начальное целое число для заполнения матрицы >> ");
+    initVal = Convert.ToInt32(Console.ReadLine());
+
+    if (m < 0 ) throw new FormatException();
+}
+catch (FormatException e)
+{
+    Console.WriteLine("Неверный ввод! [Подробности: {0}]", e.Message);
+    Console.WriteLine("Программа завершит работу...");
+    errorOcured = true;
+}
+
 int[,,] matrix = new int[2, 2, 2];
 
 Fill3DMatrix(matrix);

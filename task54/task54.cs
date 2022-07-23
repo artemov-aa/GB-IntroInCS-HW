@@ -10,20 +10,87 @@
 // 2 3 5 9
 // 2 4 4 8
 
-int VerifyIntegerNumber(string input)
+Console.Clear();
+PrintTitle("Задача 54. Построчная сортировка элементов массива");
+int rows        = InputNaturalNumber("Введите количество строк массива: ");
+int columns     = InputNaturalNumber("Введите количество столбцов массива: ");
+int minValue    = InputIntegerNumber("Введите минимальное значение для элементов массива: ");
+int maxValue    = InputIntegerNumber("Введите максимальное значение для элементов массива: ");
+
+int[,] array = CreateMatrix(rows, columns, minValue, maxValue);
+Console.WriteLine("\nИсходная матрица:\n");
+PrintMatrix(array);
+
+// В задаче небольшое противоречие между условием и примером, поэтому предусмотрим оба варианта сортировки.
+int typeOfSort = InputIntegerNumber("Как вы хотите отсортировать элементы строк массива? По убыванию (0) или по возрастанию (1)?: ");
+
+while (typeOfSort != 0 && typeOfSort != 1)
+{
+    Console.Write("Недопустимый вариант! Введите одно из двух значений (0 или 1): ");
+    typeOfSort = InputIntegerNumber("");
+}
+
+if (typeOfSort == 0)
+{
+    SelectionSortDown(array);
+    Console.WriteLine("\nМассив, отсортированный построчно по убыванию:\n");
+    PrintMatrix(array);
+}
+else
+{
+    SelectionSortUp(array);
+    Console.WriteLine("\nМассив, отсортированный построчно по возрастанию:\n");
+    PrintMatrix(array);
+}
+
+
+
+
+void PrintTitle(string message)
+{
+    string underline = new string('-', message.Length);
+    Console.WriteLine($"{message}\n{underline}\n");
+}
+
+int InputNaturalNumber(string message)
+{
+    Console.Write(message);
+    int number = VerifyNaturalNumber(Console.ReadLine());
+    return number;
+}
+
+int InputIntegerNumber(string message)
+{
+    Console.Write(message);
+    int number = VerifyIntegerNumber(Console.ReadLine());
+    return number;
+}
+
+int VerifyNaturalNumber(string input)
 {
     int result;
-
-    while (!int.TryParse(input, out result))
+    while (!int.TryParse(input, out result) || result < 1)
     {
-        Console.Write("Неверный ввод! \nВведите натуральное число -> ");
+        Console.Write("Неверный ввод! \nВведите натуральное число: ");
         input = Console.ReadLine();
     }
 
     return result;
 }
 
-int[,] GetMatrix(int rows = 4, int columns = 4, int min = 0, int max = 10)
+int VerifyIntegerNumber(string input)
+{
+    int result;
+    while (!int.TryParse(input, out result))
+    {
+        Console.Write("Неверный ввод! \nВведите целое число: ");
+        input = Console.ReadLine();
+    }
+
+    return result;
+}
+
+int[,] CreateMatrix(int rows = 4, int columns = 4, int min = 0, int max = 10)
 {
     int[,] matrix = new int[rows, columns];
     var rnd = new Random();
@@ -105,45 +172,4 @@ void SelectionSortDown(int[,] matrix)
             Swap(ref matrix[i, j], ref matrix[i, minPosition]);
         }
     }
-}
-
-//---------------------------------------------------------------//
-
-Console.Clear();
-
-Console.Write("Задайте количество строк матрицы: ");
-int rows = VerifyIntegerNumber(Console.ReadLine());
-Console.Write("Задайте количество столбцов матрицы: ");
-int columns = VerifyIntegerNumber(Console.ReadLine());
-Console.Write("Задайте минимальное значение элементов: ");
-int min = VerifyIntegerNumber(Console.ReadLine());
-Console.Write("Задайте максимальное значение элементов: ");
-int max = VerifyIntegerNumber(Console.ReadLine());
-
-int[,] array = GetMatrix(rows, columns, min, max);
-
-Console.WriteLine("\nИсходная матрица:\n");
-PrintMatrix(array);
-
-// В задаче противоречие между условием и примером, поэтому предусмотрим оба варианта.
-Console.Write("Как вы хотите отсортировать элементы строк матрицы? По убыванию (0) или по возрастанию (1): ");
-int kindOfSort = VerifyIntegerNumber(Console.ReadLine());
-
-while (kindOfSort != 0 && kindOfSort != 1)
-{
-    Console.Write("Недопустимый вариант! Введите одно из двух значений (0 или 1): ");
-    kindOfSort = VerifyIntegerNumber(Console.ReadLine());
-}
-
-if (kindOfSort == 0)
-{
-    SelectionSortDown(array);
-    Console.WriteLine("\nОтсортированная матрица:\n");
-    PrintMatrix(array);
-}
-else
-{
-    SelectionSortUp(array);
-    Console.WriteLine("\nОтсортированная матрица:\n");
-    PrintMatrix(array);
 }
