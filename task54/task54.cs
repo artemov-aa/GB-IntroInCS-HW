@@ -13,22 +13,22 @@
 Console.Clear();
 PrintTitle("Задача 54. Построчная сортировка элементов массива");
 
-int rows        = InputNaturalNumber("Введите количество строк массива: ");
-int columns     = InputNaturalNumber("Введите количество столбцов массива: ");
-int minValue    = InputIntegerNumber("Введите минимальное значение для элементов массива: ");
-int maxValue    = InputIntegerNumber("Введите максимальное значение для элементов массива: ");
+int rows        = InputNumber("Введите количество строк массива: ", 0);
+int columns     = InputNumber("Введите количество столбцов массива: ", 0);
+int minValue    = InputNumber("Введите минимальное значение для элементов массива: ", 1);
+int maxValue    = InputNumber("Введите максимальное значение для элементов массива: ", 1);
 
 int[,] array = CreateMatrix(rows, columns, minValue, maxValue);
 Console.WriteLine("\nИсходная матрица:\n");
 PrintMatrix(array);
 
 // В задаче небольшое противоречие между условием и примером, поэтому предусмотрим оба варианта сортировки.
-int typeOfSort = InputIntegerNumber("Как вы хотите отсортировать элементы строк массива? По убыванию (0) или по возрастанию (1)?: ");
+int typeOfSort = InputNumber("Как вы хотите отсортировать элементы строк массива? По убыванию (0) или по возрастанию (1)?: ", 1);
 
 while (typeOfSort != 0 && typeOfSort != 1)
 {
     Console.Write("Недопустимый вариант! Введите одно из двух значений (0 или 1): ");
-    typeOfSort = InputIntegerNumber("");
+    typeOfSort = InputNumber("", 1);
 }
 
 if (typeOfSort == 0)
@@ -44,6 +44,10 @@ else
     PrintMatrix(array);
 }
 
+Console.WriteLine();
+
+
+
 
 void PrintTitle(string message)
 {
@@ -51,40 +55,29 @@ void PrintTitle(string message)
     Console.WriteLine($"{message}\n{underline}\n");
 }
 
-int InputNaturalNumber(string message)
+int InputNumber(string message, int typeOfNumber)
 {
     Console.Write(message);
-    int number = VerifyNaturalNumber(Console.ReadLine());
-    return number;
-}
-
-int InputIntegerNumber(string message)
-{
-    Console.Write(message);
-    int number = VerifyIntegerNumber(Console.ReadLine());
-    return number;
-}
-
-int VerifyNaturalNumber(string input)
-{
-    int result;
-    while (!int.TryParse(input, out result) || result < 1)
+    string input = Console.ReadLine();
+    int number = 0;
+    switch (typeOfNumber)
     {
-        Console.Write("Неверный ввод! \nВведите натуральное число: ");
-        input = Console.ReadLine();
+        case 0:
+            while (!int.TryParse(input, out number) || number < 1)
+            {
+                Console.Write("Неверный ввод!\nВведите натуральное число: ");
+                input = Console.ReadLine();
+            }
+            break;
+        case 1:
+            while (!int.TryParse(input, out number))
+            {
+                Console.Write("Неверный ввод!\nВведите целое число: ");
+                input = Console.ReadLine();
+            }
+            break;
     }
-    return result;
-}
-
-int VerifyIntegerNumber(string input)
-{
-    int result;
-    while (!int.TryParse(input, out result))
-    {
-        Console.Write("Неверный ввод! \nВведите целое число: ");
-        input = Console.ReadLine();
-    }
-    return result;
+    return number;
 }
 
 int[,] CreateMatrix(int rows = 4, int columns = 4, int min = 0, int max = 10)
