@@ -8,6 +8,27 @@
 // 5 2 6 7
 // Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
 
+Console.Clear();
+
+Console.Write("Задайте количество строк матрицы: ");
+int rows = VerifyIntegerNumber(Console.ReadLine());
+Console.Write("Задайте количество столбцов матрицы: ");
+int columns = VerifyIntegerNumber(Console.ReadLine());
+Console.Write("Задайте минимальное значение элементов: ");
+int min = VerifyIntegerNumber(Console.ReadLine());
+Console.Write("Задайте максимальное значение элементов: ");
+int max = VerifyIntegerNumber(Console.ReadLine());
+
+int[,] array = GetMatrix(rows, columns, min, max);
+
+Console.WriteLine("\nИсходная матрица:\n");
+PrintMatrix(array);
+
+int minSum;
+MinSumByRows(array, out minSum);
+
+Console.WriteLine($"Строка с наименьшей суммой элементов: {minSum + 1} строка.");
+
 int VerifyIntegerNumber(string input)
 {
     int result;
@@ -82,26 +103,3 @@ void MinSumByRows(int[,] matrix, out int numberOfRow)
         sum = 0;
     }
 }
-
-//-------------------------------------------------------//
-
-Console.Clear();
-
-Console.Write("Задайте количество строк матрицы: ");
-int rows = VerifyIntegerNumber(Console.ReadLine());
-Console.Write("Задайте количество столбцов матрицы: ");
-int columns = VerifyIntegerNumber(Console.ReadLine());
-Console.Write("Задайте минимальное значение элементов: ");
-int min = VerifyIntegerNumber(Console.ReadLine());
-Console.Write("Задайте максимальное значение элементов: ");
-int max = VerifyIntegerNumber(Console.ReadLine());
-
-int[,] array = GetMatrix(rows, columns, min, max);
-
-Console.WriteLine("\nИсходная матрица:\n");
-PrintMatrix(array);
-
-int minSum;
-MinSumByRows(array, out minSum);
-
-Console.WriteLine($"Строка с наименьшей суммой элементов: {minSum + 1} строка.");

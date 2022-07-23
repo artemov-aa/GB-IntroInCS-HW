@@ -12,12 +12,13 @@
 
 Console.Clear();
 PrintTitle("Задача 54. Построчная сортировка элементов массива");
+
 int rows        = InputNaturalNumber("Введите количество строк массива: ");
 int columns     = InputNaturalNumber("Введите количество столбцов массива: ");
 int minValue    = InputIntegerNumber("Введите минимальное значение для элементов массива: ");
 int maxValue    = InputIntegerNumber("Введите максимальное значение для элементов массива: ");
 
-int[,] array = CreateMatrix(rows, columns, minValue, maxValue);
+int[,] array    = CreateMatrix(rows, columns, minValue, maxValue);
 Console.WriteLine("\nИсходная матрица:\n");
 PrintMatrix(array);
 
@@ -42,8 +43,6 @@ else
     Console.WriteLine("\nМассив, отсортированный построчно по возрастанию:\n");
     PrintMatrix(array);
 }
-
-
 
 
 void PrintTitle(string message)
@@ -74,7 +73,6 @@ int VerifyNaturalNumber(string input)
         Console.Write("Неверный ввод! \nВведите натуральное число: ");
         input = Console.ReadLine();
     }
-
     return result;
 }
 
@@ -86,7 +84,6 @@ int VerifyIntegerNumber(string input)
         Console.Write("Неверный ввод! \nВведите целое число: ");
         input = Console.ReadLine();
     }
-
     return result;
 }
 
@@ -94,7 +91,6 @@ int[,] CreateMatrix(int rows = 4, int columns = 4, int min = 0, int max = 10)
 {
     int[,] matrix = new int[rows, columns];
     var rnd = new Random();
-
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < columns; j++)
@@ -102,7 +98,6 @@ int[,] CreateMatrix(int rows = 4, int columns = 4, int min = 0, int max = 10)
             matrix[i, j] = rnd.Next(min, max + 1);
         }
     }
-
     return matrix;
 }
 
@@ -111,7 +106,6 @@ void PrintMatrix(int[,] matrix)
     int rowsLength = matrix.GetLength(0);
     int columnsLength = matrix.GetLength(1);
     const int widthOfColumn = 3;
-
     for (int i = 0; i < rowsLength; i++)
     {
         for (int j = 0; j < columnsLength; j++)
@@ -121,7 +115,6 @@ void PrintMatrix(int[,] matrix)
         }
         Console.WriteLine();
     }
-
     Console.WriteLine();
 }
 
@@ -136,18 +129,15 @@ void SelectionSortUp(int[,] matrix)
 {
     int rowsLength = matrix.GetLength(0);
     int columnsLength = matrix.GetLength(1);
-
     for (int i = 0; i < rowsLength; i++)
     {
         for (int j = 0; j < columnsLength - 1; j++)
         {
             int minPosition = j;
-
             for (int k = j + 1; k < columnsLength; k++)
             {
                 if (matrix[i, k] < matrix[i, minPosition]) minPosition = k;
             }
-
             Swap(ref matrix[i, j], ref matrix[i, minPosition]);
         }
     }
@@ -157,18 +147,15 @@ void SelectionSortDown(int[,] matrix)
 {
     int rowsLength = matrix.GetLength(0);
     int columnsLength = matrix.GetLength(1);
-
     for (int i = 0; i < rowsLength; i++)
     {
         for (int j = 0; j < columnsLength - 1; j++)
         {
             int minPosition = j;
-
             for (int k = j + 1; k < columnsLength; k++)
             {
                 if (matrix[i, k] > matrix[i, minPosition]) minPosition = k;
             }
-
             Swap(ref matrix[i, j], ref matrix[i, minPosition]);
         }
     }
