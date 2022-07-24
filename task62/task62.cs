@@ -6,11 +6,57 @@
 // 11 16 15 6
 // 10 9 8 7
 
+Console.Clear();
+PrintTitle("Задача 62. Спиральное заполнение матрицы");
+
+int sizeOfMtrx  = InputNumber("Введите размер (M) квадратной матрицы (M x M): ", 0);
+int initVal     = InputNumber("Введите начальное целое число для заполнения матрицы: ", 1);
+
+int[,] matrix = new int[sizeOfMtrx, sizeOfMtrx];
+FillALoopOfMatrix(matrix, 0, matrix.GetLength(0) - 1, 0, matrix.GetLength(0) - 1, initVal);
+
+Console.WriteLine("\nСпирально заполненная матрица:\n");
+PrintMatrix(matrix);
+
+
+
+
+void PrintTitle(string message)
+{
+    string underline = new string('-', message.Length);
+    Console.WriteLine($"{message}\n{underline}\n");
+}
+
+int InputNumber(string message, int typeOfNumber)
+{
+    Console.Write(message);
+    string input = Console.ReadLine();
+    int number = 0;
+    switch (typeOfNumber)
+    {
+        case 0:
+            while (!int.TryParse(input, out number) || number < 1)
+            {
+                Console.Write("Неверный ввод!\nВведите натуральное число: ");
+                input = Console.ReadLine();
+            }
+            break;
+        case 1:
+            while (!int.TryParse(input, out number))
+            {
+                Console.Write("Неверный ввод!\nВведите целое число: ");
+                input = Console.ReadLine();
+            }
+            break;
+    }
+    return number;
+}
+
 void PrintMatrix(int[,] matrix)
 {
-    int rowsLength = matrix.GetLength(0), columnsLength = matrix.GetLength(1);
+    int rowsLength = matrix.GetLength(0);
+    int columnsLength = matrix.GetLength(1);
     const int widthOfColumn = 3;
-
     for (int i = 0; i < rowsLength; i++)
     {
         for (int j = 0; j < columnsLength; j++)
@@ -20,7 +66,6 @@ void PrintMatrix(int[,] matrix)
         }
         Console.WriteLine();
     }
-
     Console.WriteLine();
 }
 
@@ -38,37 +83,32 @@ void FillALoopOfMatrix(int[,] matrix,
         matrix[initRow, i] = initVal;
         initVal++;
     }
-
     for (int i = initRow; i < endRow; i++)
     {
         matrix[i, endCol] = initVal;
         initVal++;
     }
-
     for (int i = endCol; i > initCol; i--)
     {
         matrix[endRow, i] = initVal;
         initVal++;
     }
-
     for (int i = endRow; i > initRow; i--)
     {
         matrix[i, initCol] = initVal;
         initVal++;
     }
 
-    // TODO: подумать над условием заполнения и выхода в том случае, если у нас прямоугольная матрица.
-    
+    // TODO: подумать над условием заполнения и выхода в том случае, если у нас прямоугольная матрица.    
     // Условие для матрицы нечетного размера.
-    if (initRow == endRow)// && initCol == endCol)
+    if (initRow == endRow)
     {
         matrix[endRow, endCol] = initVal;
         return;
     }
 
     // Условие для матрицы четного размера.
-    if (initRow > endRow)// && initCol > endCol)
-        return;
+    if (initRow > endRow) return;
 
     // Рекурсивно вызываем метод, передаем ему границы следующей (вложенной) матрицы
     // и начальное значение для продолжения заполнения.
@@ -78,41 +118,4 @@ void FillALoopOfMatrix(int[,] matrix,
                       initCol + 1,
                       endCol - 1,
                       initVal);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------//
-
-Console.Clear();
-
-int m = 0;
-int initVal = 0;
-bool errorOcured = false;
-
-Console.WriteLine("==== Спиральное заполнение матрицы ====\n");
-
-try
-{
-    Console.Write("Введите размер стороны квадратной матрицы >> ");
-    m = Convert.ToInt32(Console.ReadLine());
-
-    Console.Write("Введите начальное целое число для заполнения матрицы >> ");
-    initVal = Convert.ToInt32(Console.ReadLine());
-
-    if (m < 0 ) throw new FormatException();
-}
-catch (FormatException e)
-{
-    Console.WriteLine("Неверный ввод! [Подробности: {0}]", e.Message);
-    Console.WriteLine("Программа завершит работу...");
-    errorOcured = true;
-}
-
-if (!errorOcured)
-{
-    int[,] array = new int[m, m];
-
-    FillALoopOfMatrix(array, 0, array.GetLength(0) - 1, 0, array.GetLength(0) - 1, initVal);
-
-    Console.WriteLine("\nСпирально заполненная матрица:\n");
-    PrintMatrix(array);
 }
